@@ -1,9 +1,10 @@
-function createCard(name, description, pictureUrl, startDate, endDate) {
+function createCard(name, description, pictureUrl, startDate, endDate, location) {
     return `
       <div class="card shadow p-3 mb-5 bg-body-tertiary rounded">
         <img src="${pictureUrl}" class="card-img-top">
         <div class="card-body">
           <h5 class="card-title">${name}</h5>
+          <h6 class="card-subtitle mb-2 text-muted">${location}</h6>
           <p class="card-text">${description}</p>
           <div class="card-footer text-muted">
             <p class="card-text">${startDate} - ${endDate}</p>
@@ -35,6 +36,7 @@ try {
         const details = await detailResponse.json();
         const name = details.conference.name;
         const description = details.conference.description;
+        const location = details.conference.location.name;
         const startDate = new Date(details.conference.starts).toLocaleDateString('en-US', {
             year: 'numeric',
             month: '2-digit',
@@ -46,7 +48,7 @@ try {
             day: '2-digit'
           });
         const pictureUrl = details.conference.location.picture_url;
-        const html = createCard(name, description, pictureUrl, startDate, endDate);
+        const html = createCard(name, description, pictureUrl, startDate, endDate, location);
 
         const columnIndex = index % columns.length; // Calculate the column index
         const column = columns[columnIndex]; // Select the appropriate column
