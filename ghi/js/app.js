@@ -22,7 +22,9 @@ try {
     const response = await fetch(url);
 
     if (!response.ok) {
-    // Handle bad response
+        const errorMessage = "Failed to fetch conference data.";
+        const errorElement = document.getElementById('error-message');
+        errorElement.textContent = errorMessage;
     } else {
     const data = await response.json();
 
@@ -58,6 +60,5 @@ try {
     }
 } catch (e) {
     console.error(e);
-    // Handle errors
 }
 });
